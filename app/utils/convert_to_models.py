@@ -34,7 +34,7 @@ def convert_to_hostages(person_id, person_json):
     ]
     return hostages_messages
 
-def convert_to_expensive(person_id, person_json):
+def convert_to_explsive(person_id, person_json):
     hostages_messages = [
         ExplosiveMessages(
             content=message,
@@ -45,7 +45,7 @@ def convert_to_expensive(person_id, person_json):
 
 
 def convert_to_device(person_id, person_json):
-    json_device = person_json.get("device", {})
+    json_device = person_json.get("device_info", {})
     device = Device(
         browser=json_device.get("browser", "no_browser"),
         os=json_device.get("os", "no_os"),

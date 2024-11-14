@@ -8,9 +8,10 @@ def create_location(new_location):
     try:
         with session_maker() as session:
             session.add(new_location)
-            session.commit()  # Commit the transaction to the database
+            session.commit()
+            session.refresh(new_location)# Commit the transaction to the database
 
-        return new_location  # Return the created Location object
+        return new_location.id  # Return the created Location object
     except SQLAlchemyError as e:
         session.rollback()  # Rollback in case of error
         print(f"Error creating location: {str(e)}")

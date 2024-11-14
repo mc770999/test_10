@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 from app.psql.models import Base
 
 class HostageMessages(Base):
-    __tablename__ = 'suspicious_hostage_contents'
+    __tablename__ = 'hostage_messages'
 
     id = Column(Integer, primary_key=True)
     content = Column(Text, nullable=False)

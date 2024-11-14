@@ -30,7 +30,7 @@ def produce_message(person: dict):
             key=person['id'].encode('utf-8')
         )
 
-    elif contain_hostage(person):
+    if contain_hostage(person):
         kafka_producer.send(
             os.environ["TOPIC_HOSTAGE_MESSAGE_CONSUMER"],
             value=person,
