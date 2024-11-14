@@ -15,6 +15,7 @@ def consume_explosive():
         auto_offset_reset='earliest'
     )
     for message in consumer:
+
         print(f'Received: {message.key}:{message.value}')
 
 app = Flask(__name__)

@@ -1,7 +1,8 @@
 
 
 def contain_explosive(person):
-    # Check if any value in the `person` dictionary contains the word "explosive"
-    return any("explosive" in str(value).lower() for value in person.())
+    return any("explosive" in str(value).lower() for value in person["sentences"])
+
+
 def contain_hostage(person):
-    return True
+    return any("hostage" in str(value).lower() for value in person["sentences"])
