@@ -18,7 +18,7 @@ def consume_explosive():
         os.environ["TOPIC_EXPLOSIVE_MESSAGE_CONSUMER"],
         bootstrap_servers=os.environ['BOOTSTRAP_SERVERS'],
         value_deserializer=lambda v: json.loads(v.decode('utf-8')),
-        auto_offset_reset='earliest'
+        auto_offset_reset='latest'
     )
     for message in consumer:
         person_id = create_person_on_psql(convert_to_person(message.value))

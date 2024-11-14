@@ -18,3 +18,12 @@ class Device(Base):
 
     def __repr__(self):
         return f"<Device(device_id={self.device_id}, browser={self.browser}, os={self.os})>"
+
+    def to_dict(self):
+        return {
+            "id":self.id,
+            "browser":self.browser,
+            "os":self.os,
+            "device_id":self.device_id,
+            "person_id":self.person_id
+        }

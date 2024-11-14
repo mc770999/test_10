@@ -18,3 +18,13 @@ class Location(Base):
 
     def __repr__(self):
         return f"<Location(city={self.city}, country={self.country}, latitude={self.latitude}, longitude={self.longitude})>"
+
+    def to_dict(self):
+        return {
+            "id" :self.id,
+            "latitude":self.latitude,
+            "longitude":self.longitude,
+            "city":self.city,
+            "country":self.country,
+            "person_id":self.person_id
+        }

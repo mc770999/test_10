@@ -1,7 +1,7 @@
 from sqlalchemy.exc import SQLAlchemyError
 
 from app.psql.database import session_maker
-from app.psql.models import Person
+from app.psql.models import Person, Device, Location, ExplosiveMessages, HostageMessages
 
 
 def create_person_on_psql(person):
@@ -54,3 +54,23 @@ def delete_person_by_id(person_id):
         session.rollback()  # Rollback in case of error
         print(f"Error deleting person: {str(e)}")
         return False
+
+def get_person_by_email(t_email):
+    try:
+        with session_maker() as session:
+
+            person = (session.query(Person).filter_by(email=t_email)
+            .join(Device,Device.person_id == Person.id)
+            .join(Location,Location.person_id == Person.id)
+            .outerjoin(ExplosiveMessages,ExplosiveMessages.person_id == Person.id)
+            .outerjoin(HostageMessages,HostageMessages.person_id == Person.id)
+            .first()
+            )
+            print(person.to_dict())
+            return person.to_dict()
+
+    except SQLAlchemyError as e:
+        print(f"Error retrieving person: {str(e)}")
+        return None
+
+

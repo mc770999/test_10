@@ -22,3 +22,16 @@ class Person(Base):
 
     def __repr__(self):
         return f"<Person(email={self.email}, username={self.username}, created_at={self.created_at})>"
+
+    def to_dict(self):
+        return {
+            "id" : self.id,
+            "email" : self.email,
+            "username" : self.username,
+            "ip_address" : self.ip_address,
+            "created_at" : self.created_at,
+            "location" : next(l.to_dict() for l in self.location),
+            "device":next(d.to_dict() for d in self.device),
+            "explosive_message":[m.to_dict() for m in self.explosive_message] ,
+            "hostage_messages": [m.to_dict() for m in self.hostage_messages]
+        }

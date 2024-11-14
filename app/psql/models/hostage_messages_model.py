@@ -13,3 +13,10 @@ class HostageMessages(Base):
 
     def __repr__(self):
         return f"<SuspiciousHostageContent(id={self.id}, content={self.content})>"
+
+    def to_dict(self):
+        return {
+            'id' :self.id,
+            "content" :self.content,
+            "person_ id" : self.person_id
+        }

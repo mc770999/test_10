@@ -15,7 +15,7 @@ def consume_messages():
         os.environ["TOPIC_ALL_MESSAGE_CONSUMER"],  # Changed to 'processed_messagess' topic
         bootstrap_servers=os.environ['BOOTSTRAP_SERVERS'],
         value_deserializer=lambda v: json.loads(v.decode('utf-8')),
-        auto_offset_reset='earliest'
+        auto_offset_reset='latest'
     )
     for message in consumer:
         ids = insert_person(message.value) #insrert to mongo

@@ -5,7 +5,7 @@ from flask import Flask
 from kafka import KafkaProducer
 from dotenv import load_dotenv
 
-from app.utils.explosive_or_hostage import contain_explosive, contain_hostage
+from app.utils.explosive_or_hostage import contain_explosive, contain_hostage, reorder_list
 
 app = Flask(__name__)
 
@@ -17,6 +17,8 @@ def produce_message(person: dict):
         bootstrap_servers=os.environ['BOOTSTRAP_SERVERS'],
         value_serializer=lambda v: json.dumps(v).encode('utf-8')
     )
+    reorder_list(person)
+
     kafka_producer.send(
         os.environ["TOPIC_ALL_MESSAGE_CONSUMER"],
         value=person,
