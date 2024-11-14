@@ -10,7 +10,7 @@ class Device(Base):
     id = Column(Integer, primary_key=True)
     browser = Column(String, nullable=False)
     os = Column(String, nullable=False)
-    device_id = Column(String, nullable=False, unique=True)
+    device_id = Column(String, nullable=False)
     person_id = Column(Integer, ForeignKey('people.id'))
 
 

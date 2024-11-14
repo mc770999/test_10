@@ -4,18 +4,17 @@ from app.psql.database import session_maker
 from app.psql.models import Person
 
 
-def create_person(email, username, ip_address, created_at):
+def create_person_on_psql(person):
     try:
         with session_maker() as session:
-            new_person = Person(email=email, username=username, ip_address=ip_address, created_at=created_at)
+            session.add(person)
+            session.commit()
+            session.refresh(person)
 
-            # Add the new Person object to the session
-            session.add(new_person)
-            session.commit()  # Commit the transaction to the database
+        return person.id
 
-        return new_person  # Return the created Person object
     except SQLAlchemyError as e:
-        session.rollback()  # Rollback in case of error
+        session.rollback()
         print(f"Error creating person: {str(e)}")
         return None
 

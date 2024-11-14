@@ -9,7 +9,7 @@ from app.psql.models import Base
 
 load_dotenv()
 
-engine = create_engine(os.environ["DB_URL"])
+engine = create_engine(os.environ["DB_PSQL"])
 session_maker = sessionmaker(bind=engine)
 
 def init_db():

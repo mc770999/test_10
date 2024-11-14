@@ -4,12 +4,9 @@ from app.psql.database import session_maker
 from app.psql.models import Location
 
 
-def create_location(latitude, longitude, city, country, person_id):
+def create_location(new_location):
     try:
         with session_maker() as session:
-            new_location = Location(latitude=latitude, longitude=longitude, city=city, country=country, person_id=person_id)
-
-            # Add the new Location object to the session
             session.add(new_location)
             session.commit()  # Commit the transaction to the database
 
@@ -17,7 +14,7 @@ def create_location(latitude, longitude, city, country, person_id):
     except SQLAlchemyError as e:
         session.rollback()  # Rollback in case of error
         print(f"Error creating location: {str(e)}")
-        return None
+        return str(e)
 
 # 2. Read Operation (R)
 def get_location_by_id(location_id):
